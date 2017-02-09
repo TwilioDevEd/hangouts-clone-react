@@ -20,3 +20,10 @@ export const setUserName = (username) => {
     username,
   };
 };
+
+export const setRoomId = (id) => {
+  return {
+    type: constants.SET_ROOM_ID,
+    id,
+  };
+};
