@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import GoogleLogin from 'react-google-login';
 import { AccessToken } from 'twilio';
@@ -10,6 +11,12 @@ import {
   TWILIO_API_SECRET,
   TWILIO_CONFIGURATION_SID,
 } from '../env';
+
+import {
+  setUserToken,
+  setUserId,
+  setUserName,
+} from '../actions';
 
 const styles = StyleSheet.create({
   content: {
@@ -47,8 +54,7 @@ class Login extends React.Component {
     grant.configurationProfileSid = TWILIO_CONFIGURATION_SID;
     token.addGrant(grant);
 
-    console.log(token);
-    console.log(token.toJwt());
+    this.props.postSuccess(token, googleId, email);
 
     this.context.router.push('/main');
   }
@@ -76,4 +82,17 @@ Login.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export default Login;
+export const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+  postSuccess: (token, id, username) => {
+    console.log('dispatching actions');
+    dispatch(setUserToken(token));
+    dispatch(setUserId(id));
+    dispatch(setUserName(username));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
