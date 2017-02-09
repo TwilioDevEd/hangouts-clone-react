@@ -18,8 +18,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 const routes = (
   <Route path="/" component={App}>
     <Route path="/login" component={Login}/>
-    <Route path="/:username" component={Main}/>
-    <Route path="/:username/video/:id" component={VideoChat}/>
+    <Route path="/main" component={Main}/>
   </Route>
 );
 
