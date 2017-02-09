@@ -5,6 +5,7 @@ import room from './room';
 import peripherals from './peripherals';
 
 const rootReducer = combineReducers({
+  user,
   routing
 });
 
