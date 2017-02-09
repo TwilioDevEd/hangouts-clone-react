@@ -1,6 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import VideoCall from 'material-ui/svg-icons/av/video-call';
+
+import {
+  setRoomId,
+} from '../actions';
 
 const styles = StyleSheet.create({
   content: {
@@ -22,7 +27,7 @@ class Main extends React.Component {
       <div className={css(styles.content)}>
         <h1>Let's get started!</h1>
         <h2>Click the button below to create a new video chat room!</h2>
-        <div>
+        <div onClick={this.props.createRoom}>
           <VideoCall
             style={{
               border: 'white 2px solid',
@@ -38,4 +43,10 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export const mapDispatchToProps = (dispatch) => ({
+  createRoom: (id) => {
+    dispatch(setRoomId(id));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(Main);
