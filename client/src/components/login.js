@@ -35,9 +35,9 @@ class Login extends React.Component {
   }
 
   onSuccess(response) {
-    console.log(response);
     const tokenId = response.tokenId;
     const googleId = response.profileObj.googleId;
+    const email = response.profileObj.email;
     fetch('/token', {
       method: 'POST',
       headers: {
@@ -49,7 +49,14 @@ class Login extends React.Component {
         googleId: googleId,
       })
     }).then((response) => {
-      console.log(response);
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        alert('Authentication via Google was unsuccessful. Please try again!');
+      }
+    }).then((json) => {
+      this.props.postSuccess(json.token, json.identity, email);
+      this.context.router.push('/main');
     });
   }
 
