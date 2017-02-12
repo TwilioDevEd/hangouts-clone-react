@@ -1,27 +1,31 @@
 {
   "name": "hangouts-clone-react",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A clone of Google Hangouts using React and WebRTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "babel-node server.js",
+    "client": "babel-node start-client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TwilioDevEd/hangouts-clone-react.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TwilioDevEd/hangouts-clone-react/issues"
+  },
+  "homepage": "https://github.com/TwilioDevEd/hangouts-clone-react#readme",
   "devDependencies": {
-    "react-scripts": "0.8.5",
-    "redux-logger": "^2.8.1"
+    "concurrently": "^3.3.0"
   },
   "dependencies": {
-    "aphrodite": "^1.1.0",
-    "material-ui": "^0.16.7",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.2",
-    "react-router": "^3.0.2",
-    "react-router-redux": "^4.0.7",
-    "redux": "^3.6.0",
-    "redux-actions": "^1.2.1",
+    "body-parser": "^1.16.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "google-auth-library": "^0.10.0",
     "twilio": "^2.11.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   }
 }

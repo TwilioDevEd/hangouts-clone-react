@@ -19,6 +19,7 @@ const routes = (
   <Route path="/" component={App}>
     <Route path="/login" component={Login}/>
     <Route path="/main" component={Main}/>
+    <Route path="/video/:id" component={VideoChat}/>
   </Route>
 );
 

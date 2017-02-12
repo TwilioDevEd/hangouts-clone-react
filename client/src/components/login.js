@@ -2,14 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import GoogleLogin from 'react-google-login';
-import { AccessToken } from 'twilio';
 
 import {
   GOOGLE_CLIENT_ID,
-  TWILIO_ACCOUNT_SID,
-  TWILIO_API_KEY,
-  TWILIO_API_SECRET,
-  TWILIO_CONFIGURATION_SID,
 } from '../env';
 
 import {
@@ -40,23 +35,22 @@ class Login extends React.Component {
   }
 
   onSuccess(response) {
-    const email = response.profileObj.email;
+    console.log(response);
+    const tokenId = response.tokenId;
     const googleId = response.profileObj.googleId;
-    const token = new AccessToken(
-      TWILIO_ACCOUNT_SID,
-      TWILIO_API_KEY,
-      TWILIO_API_SECRET
-    );
-
-    token.identity = googleId;
-    
-    const grant = new AccessToken.VideoGrant();
-    grant.configurationProfileSid = TWILIO_CONFIGURATION_SID;
-    token.addGrant(grant);
-
-    this.props.postSuccess(token, googleId, email);
-
-    this.context.router.push('/main');
+    fetch('/token', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        tokenId: tokenId,
+        googleId: googleId,
+      })
+    }).then((response) => {
+      console.log(response);
+    });
   }
 
   onFailure(response) {
