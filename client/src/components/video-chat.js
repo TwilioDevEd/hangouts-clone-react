@@ -11,10 +11,27 @@ const styles = StyleSheet.create({
     display: 'inline-block',
     marginTop: '20px',
   },
+  warning: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    padding: '30px',
+    fontFamily: 'Roboto',
+    color: 'red',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
+  },
 });
 
 class VideoChat extends React.Component {
   render() {
+    if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
+      return (
+        <div className={css(styles.warning)}>
+          <h1>Oops! WebRTC is not available in your browser.</h1>
+        </div>
+      );
+    }
     return (
       <div className={css(styles.toolbar)}>
         <MicOff color='white'/>
