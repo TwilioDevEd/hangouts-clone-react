@@ -35,7 +35,7 @@ class VideoChat extends React.Component {
   }
 
   componentDidMount() {
-    this.videoClient.connect({to: 'new-room'}).then((room) => {
+    this.videoClient.connect({to: this.props.room.id}).then((room) => {
       this.setState({
         activeRoom: room,
       });
