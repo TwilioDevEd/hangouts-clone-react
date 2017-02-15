@@ -19,7 +19,8 @@
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.1",
-    "twilio": "^2.11.1"
+    "shortid": "^2.2.6",
+    "twilio-video": "^1.0.0-beta4"
   },
   "scripts": {
     "start": "react-scripts start",
