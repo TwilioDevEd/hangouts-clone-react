@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Router, Route, browserHistory } from 'react-router';
+import { persistStore } from 'redux-persist';
 
 import configureStore from './store/configureStore';
 import preloadedState from './store/preloadedState';
@@ -14,6 +15,9 @@ import VideoChat from './components/video-chat';
 
 const store = configureStore(preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
+
+// Persist the store
+persistStore(store);
 
 const routes = (
   <Route path="/" component={App}>

@@ -4,12 +4,7 @@ const preloadedState = {
   },
   room: {
     id: null,
-    name: null,
   },
-  peripherals: {
-    audio: false,
-    video: false,
-  }
 };
 
 export default preloadedState;
