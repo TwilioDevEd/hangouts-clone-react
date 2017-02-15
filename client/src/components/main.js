@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import shortid from 'shortid';
 import { StyleSheet, css } from 'aphrodite';
 import VideoCall from 'material-ui/svg-icons/av/video-call';
 
@@ -22,12 +23,22 @@ const styles = StyleSheet.create({
 });
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.createRoom = this.createRoom.bind(this);
+  }
+  createRoom() {
+    const id = shortid.generate();
+    this.props.createRoom(id);
+    this.context.router.push(`/video/${id}`);
+  }
+
   render() {
     return (
       <div className={css(styles.content)}>
         <h1>Let's get started!</h1>
         <h2>Click the button below to create a new video chat room!</h2>
-        <div onClick={this.props.createRoom}>
+        <div onClick={this.createRoom}>
           <VideoCall
             style={{
               border: 'white 2px solid',
@@ -41,6 +52,10 @@ class Main extends React.Component {
       </div>
     );
   }
+}
+
+Main.contextTypes = {
+  router: React.PropTypes.object.isRequired,
 }
 
 export const mapDispatchToProps = (dispatch) => ({
