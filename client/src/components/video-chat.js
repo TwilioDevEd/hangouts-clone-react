@@ -1,5 +1,7 @@
 import React from 'react';
+import Video from 'twilio-video';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
 import MicOff from 'material-ui/svg-icons/av/mic-off';
 import VideoCamOff from 'material-ui/svg-icons/av/videocam-off';
 import CallEnd from 'material-ui/svg-icons/communication/call-end';
@@ -24,6 +26,44 @@ const styles = StyleSheet.create({
 });
 
 class VideoChat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.videoClient = new Video.Client(props.user.token);
+    this.state = {
+      activeRoom: null,
+    };
+  }
+
+  componentDidMount() {
+    this.videoClient.connect({to: 'new-room'}).then((room) => {
+      this.setState({
+        activeRoom: room,
+      });
+      room.on('participantConnected', (participant) => {
+        console.log('New participant!');
+        participant.media.attach(this.remoteMedia);
+      });
+      room.on('participantDisconnected', (participant) => {
+        participant.media.detach();
+      });
+      room.on('disconnected', () => {
+        room.localParticipant.media.detach();
+        room.participants.map((participant) => {
+          participant.media.detach();
+        });
+        this.setState({
+          activeRoom: null,
+        });
+      });
+      room.localParticipant.media.attach(this.localMedia);
+      room.participants.map((participant) => {
+        participant.media.attach(this.remoteMedia);
+      });
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
       return (
@@ -32,14 +72,29 @@ class VideoChat extends React.Component {
         </div>
       );
     }
+
+    if (!this.state.activeRoom) {
+      return false;
+    }
+
     return (
-      <div className={css(styles.toolbar)}>
-        <MicOff color='white'/>
-        <VideoCamOff color='white'/>
-        <CallEnd color='red'/>
+      <div>
+        <div className={css(styles.toolbar)}>
+          <MicOff color='white'/>
+          <VideoCamOff color='white'/>
+          <CallEnd color='red'/>
+        </div>
+        <div ref={(localMedia) => { this.localMedia = localMedia; }}/>
+        <div ref={(remoteMedia) => { this.remoteMedia = remoteMedia; }}/>
       </div>
     );
   }
 }
 
-export default VideoChat;
+export const mapStateToProps = (state) => ({
+  user: state.user,
+  room: state.room,
+  peripherals: state.peripherals,
+});
+
+export default connect(mapStateToProps)(VideoChat);
