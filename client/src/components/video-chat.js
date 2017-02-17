@@ -58,7 +58,6 @@ class VideoChat extends React.Component {
         activeRoom: room,
       });
       room.on('participantConnected', (participant) => {
-        console.log('New participant!');
         participant.media.attach(this.remoteMedia);
       });
       room.on('participantDisconnected', (participant) => {
@@ -66,14 +65,14 @@ class VideoChat extends React.Component {
       });
       room.on('disconnected', () => {
         room.localParticipant.media.detach();
-        room.participants.map((participant) => {
+        room.participants.forEach((participant, key) => {
           participant.media.detach();
         });
         this.exitRoom();
       });
       room.localParticipant.media.attach(this.localMedia);
       if (room.participants) {
-        room.participants.map((participant) => {
+        room.participants.forEach((participant, key) => {
           participant.media.attach(this.remoteMedia);
         });
       }
