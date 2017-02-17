@@ -69,9 +69,7 @@ class VideoChat extends React.Component {
         room.participants.map((participant) => {
           participant.media.detach();
         });
-        this.setState({
-          activeRoom: null,
-        });
+        this.exitRoom();
       });
       room.localParticipant.media.attach(this.localMedia);
       if (room.participants) {
@@ -79,6 +77,9 @@ class VideoChat extends React.Component {
           participant.media.attach(this.remoteMedia);
         });
       }
+      this.setState({
+        activeRoom: room,
+      });
     }, (error) => {
       console.log(error);
     });
