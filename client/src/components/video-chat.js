@@ -64,6 +64,49 @@ class VideoChat extends React.Component {
     });
   }
 
+  muteAudio() {
+    if (this.state.activeRoom.localParticipant.media.isMuted) {
+      this.state.activeRoom.localParticipant.media.mute(false);
+      this.setState({
+        muted: false,
+      });
+    } else {
+      this.state.activeRoom.localParticipant.media.mute(true);
+      this.setState({
+        muted: true,
+      });
+    }
+  }
+
+  disableVideo() {
+    const videoTracks = this.state.activeRoom.localParticipant.media.videoTracks;
+    console.log(videoTracks);
+    if (this.state.activeRoom.localParticipant.media.isPaused) {
+      videoTracks.forEach((value, key) => {
+        value.enable();
+      });
+      this.setState({
+        paused: false,
+      });
+    } else {
+      videoTracks.forEach((value, key) => {
+        value.disable();
+      });
+      this.setState({
+        paused: true,
+      });
+    }
+  }
+
+  exitRoom() {
+    this.setState({
+      activeRoom: false,
+    });
+    this.state.activeRoom.disconnect();
+    this.props.clearRoom();
+    this.context.router.push('/main');
+  }
+
   render() {
     if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
       return (
