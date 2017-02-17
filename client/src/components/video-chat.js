@@ -141,6 +141,7 @@ class VideoChat extends React.Component {
       return false;
     }
 
+
     return (
       <div>
         <div className={css(styles.toolbar)}>
@@ -155,7 +156,11 @@ class VideoChat extends React.Component {
   }
 }
 
-export const mapStateToProps = (state) => ({
+VideoChat.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
   user: state.user,
   room: state.room,
   peripherals: state.peripherals,
