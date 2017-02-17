@@ -14,11 +14,8 @@ const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     padding: '20px',
-    display: 'inline-block',
-    marginTop: '20px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    verticalAlign: 'top',
+    margin: '0 auto',
+    width: '200px',
   },
   warning: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -34,7 +31,7 @@ const styles = StyleSheet.create({
     padding: '20px',
   },
   localMedia: {
-    display: 'inline-block',
+    width: '480px',
     margin: '0 auto',
   },
 });
@@ -77,9 +74,11 @@ class VideoChat extends React.Component {
         });
       });
       room.localParticipant.media.attach(this.localMedia);
-      room.participants.map((participant) => {
-        participant.media.attach(this.remoteMedia);
-      });
+      if (room.participants) {
+        room.participants.map((participant) => {
+          participant.media.attach(this.remoteMedia);
+        });
+      }
     }, (error) => {
       console.log(error);
     });
