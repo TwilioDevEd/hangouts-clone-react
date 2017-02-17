@@ -7,4 +7,9 @@ export default handleActions({
       id: action.id,
     });
   },
+  [constants.CLEAR_ROOM]: function clearRoom(state, action) {
+    return Object.assign({}, state, {
+      id: null,
+    });
+  },
 }, {});

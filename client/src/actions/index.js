@@ -27,3 +27,9 @@ export const setRoomId = (id) => {
     id,
   };
 };
+
+export const clearRoom = () => {
+  return {
+    type: constants.CLEAR_ROOM,
+  }
+};
