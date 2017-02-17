@@ -25,13 +25,19 @@ const styles = StyleSheet.create({
       opacity: 0.6,
     }
   },
+  videoBackground: {
+    background: 'black',
+    minHeight: '100%',
+    minWidth: '100%',
+  },
 });
 
 class App extends React.Component {
   render() {
+    const atVideo = this.props.location.pathname.includes("video");
     return (
       <MultiThemeProvider>
-        <div className={css(styles.background)}>
+        <div className={atVideo ? css(styles.videoBackground) : css(styles.background)}>
           {this.props.children}
         </div>
       </MultiThemeProvider>
