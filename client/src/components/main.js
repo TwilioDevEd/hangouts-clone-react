@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     color: '#fff',
     textAlign: 'left',
-    textShadown: '0 2px 4px rgba(0,0,0,0.5)',
+    textShadow: 'black 0.1em 0.1em 0.2em',
     fontWeight: '300',
     position: 'absolute',
     top: '50%',
