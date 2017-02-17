@@ -148,8 +148,8 @@ class VideoChat extends React.Component {
           <VideoCamOff color={ this.state.paused ? 'red': 'white' } onClick={this.disableVideo} className={css(styles.icon)}/>
           <CallEnd color='red' onClick={this.exitRoom} className={css(styles.icon)}/>
         </div>
-        <div ref={(localMedia) => { this.localMedia = localMedia; }}/>
-        <div ref={(remoteMedia) => { this.remoteMedia = remoteMedia; }}/>
+        <div className={css(styles.localMedia)} ref={(localMedia) => { this.localMedia = localMedia; }}/>
+        <div className={css(styles.remoteMedia)} ref={(remoteMedia) => { this.remoteMedia = remoteMedia; }}/>
       </div>
     );
   }
