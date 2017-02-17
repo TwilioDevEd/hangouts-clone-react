@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     padding: '20px',
     display: 'inline-block',
     marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    verticalAlign: 'top',
   },
   warning: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -26,6 +29,13 @@ const styles = StyleSheet.create({
     top: '50%',
     left: '50%',
     transform: 'translateX(-50%) translateY(-50%)',
+  },
+  icon: {
+    padding: '20px',
+  },
+  localMedia: {
+    display: 'inline-block',
+    margin: '0 auto',
   },
 });
 
