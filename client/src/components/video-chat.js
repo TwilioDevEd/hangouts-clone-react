@@ -42,9 +42,16 @@ const styles = StyleSheet.create({
 class VideoChat extends React.Component {
   constructor(props) {
     super(props);
+
+    this.muteAudio = this.muteAudio.bind(this);
+    this.disableVideo = this.disableVideo.bind(this);
+    this.exitRoom = this.exitRoom.bind(this);
+
     this.videoClient = new Video.Client(props.user.token);
     this.state = {
       activeRoom: null,
+      muted: false,
+      paused: false,
     };
   }
 
@@ -137,9 +144,9 @@ class VideoChat extends React.Component {
     return (
       <div>
         <div className={css(styles.toolbar)}>
-          <MicOff color='white'/>
-          <VideoCamOff color='white'/>
-          <CallEnd color='red'/>
+          <MicOff color={ this.state.muted ? 'red' : 'white' } onClick={this.muteAudio} className={css(styles.icon)}/>
+          <VideoCamOff color={ this.state.paused ? 'red': 'white' } onClick={this.disableVideo} className={css(styles.icon)}/>
+          <CallEnd color='red' onClick={this.exitRoom} className={css(styles.icon)}/>
         </div>
         <div ref={(localMedia) => { this.localMedia = localMedia; }}/>
         <div ref={(remoteMedia) => { this.remoteMedia = remoteMedia; }}/>
