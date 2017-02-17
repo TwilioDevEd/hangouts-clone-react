@@ -16,14 +16,26 @@ import VideoChat from './components/video-chat';
 const store = configureStore(preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
 
-// Persist the store
-persistStore(store);
+const validateState = (store) => {
+  return (nextState, replace) => {
+    const state = store.getState();
+    const token = state.user.token;
+    const room = state.room.id;
+    console.log(nextState);
+    if (!token && !room) {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: `/video/${nextState.params.id}` }
+      });
+    }
+  };
+};
 
 const routes = (
   <Route path="/" component={App}>
     <Route path="/login" component={Login}/>
     <Route path="/main" component={Main}/>
-    <Route path="/video/:id" component={VideoChat}/>
+    <Route path="/video/:id" component={VideoChat} onEnter={validateState(store)}/>
   </Route>
 );
 

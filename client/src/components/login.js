@@ -56,7 +56,12 @@ class Login extends React.Component {
       }
     }).then((json) => {
       this.props.postSuccess(json.token, json.identity, email);
-      this.context.router.push('/main');
+      const state = this.context.router.location.state;
+      if (state && state.nextPathname) {
+        this.context.router.push(state.nextPathname);
+      } else {
+        this.context.router.push('/main');
+      }
     });
   }
 
@@ -89,7 +94,6 @@ export const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
   postSuccess: (token, id, username) => {
-    console.log('dispatching actions');
     dispatch(setUserToken(token));
     dispatch(setUserId(id));
     dispatch(setUserName(username));
