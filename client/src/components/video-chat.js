@@ -101,7 +101,6 @@ class VideoChat extends React.Component {
 
   disableVideo() {
     const videoTracks = this.state.activeRoom.localParticipant.media.videoTracks;
-    console.log(videoTracks);
     if (this.state.activeRoom.localParticipant.media.isPaused) {
       videoTracks.forEach((value, key) => {
         value.enable();
@@ -141,7 +140,6 @@ class VideoChat extends React.Component {
       return false;
     }
 
-
     return (
       <div>
         <div className={css(styles.toolbar)}>
@@ -163,7 +161,6 @@ VideoChat.contextTypes = {
 const mapStateToProps = (state) => ({
   user: state.user,
   room: state.room,
-  peripherals: state.peripherals,
 });
 
 const mapDispatchToProps = (dispatch) => ({
