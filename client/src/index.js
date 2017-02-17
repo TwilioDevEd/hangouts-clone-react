@@ -13,6 +13,8 @@ import Login from './components/login';
 import Main from './components/main';
 import VideoChat from './components/video-chat';
 
+import { setRoomId } from './actions';
+
 const store = configureStore(preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -21,8 +23,8 @@ const validateState = (store) => {
     const state = store.getState();
     const token = state.user.token;
     const room = state.room.id;
-    console.log(nextState);
     if (!token && !room) {
+      store.dispatch(setRoomId(nextState.params.id));
       replace({
         pathname: '/login',
         state: { nextPathname: `/video/${nextState.params.id}` }
