@@ -6,6 +6,10 @@ import MicOff from 'material-ui/svg-icons/av/mic-off';
 import VideoCamOff from 'material-ui/svg-icons/av/videocam-off';
 import CallEnd from 'material-ui/svg-icons/communication/call-end';
 
+import {
+  clearRoom
+} from '../actions';
+
 const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -140,4 +144,10 @@ export const mapStateToProps = (state) => ({
   peripherals: state.peripherals,
 });
 
-export default connect(mapStateToProps)(VideoChat);
+const mapDispatchToProps = (dispatch) => ({
+  clearRoom: () => {
+    dispatch(clearRoom());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoChat);
