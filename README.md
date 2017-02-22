@@ -53,3 +53,9 @@ npm start
 
 Then navigae to [http://localhost:3000/login](http://localhost:3000/login) in
 order to use the application.
+
+### Changing the application port
+
+You can change the port that the frontend server is configured to run on by
+settng the `PORT` varialbe in the `.env` file inside the `client` directory.
+An example is shown in `client/.example.env`.
