@@ -4,10 +4,6 @@ import { StyleSheet, css } from 'aphrodite';
 import GoogleLogin from 'react-google-login';
 
 import {
-  GOOGLE_CLIENT_ID,
-} from '../env';
-
-import {
   setUserToken,
   setUserId,
   setUserName,
@@ -75,7 +71,7 @@ class Login extends React.Component {
         <h1>Hi, there!</h1>
         <h2>Get started by logging in with your Google Account.</h2>
         <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={this.onSuccess}
           onFailure={this.onFailure}
         />
