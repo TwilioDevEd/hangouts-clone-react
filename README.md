@@ -9,9 +9,20 @@ and Twilio.
 
 ### Configure Google account information
 
+Since part of our application uses Google oAuth for authentication we will
+need configure the Google Client ID. We'll need to store this ID on the backend
+and frontend since it is stored in both. In `.env`, we will configure a
+`GOOGLE_CLIENT_ID` variable for the backend.
+
 | Config Value | Description |
 |--------------|-------------|
 | GOOGLE_CLIENT_ID | Client ID needed for oAuth - generate one [using these instructions](https://developers.google.com/identity/sign-in/web/devconsole-project). |
+
+We'll also configure the same ID under a different variable name in `client/.env`.
+
+| Config Value | Description |
+|--------------|-------------|
+| REACT_APP_GOOGLE_CLIENT_ID | The same ID as above under a different name |
 
 ### Configure Twilio account information
 
