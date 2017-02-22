@@ -51,7 +51,7 @@ app.post('/token', (request, response) => {
 });
 
 app.get('*', (request, response) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 app.listen(3001, () => {
