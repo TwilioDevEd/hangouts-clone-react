@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TwilioDevEd/hangouts-clone-react#readme",
   "devDependencies": {
+    "babel-cli": "^6.23.0",
     "concurrently": "^3.3.0"
   },
   "dependencies": {
