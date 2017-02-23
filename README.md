@@ -39,10 +39,16 @@ We'll also configure the same ID under a different variable name in `client/.env
 | TWILIO_CONFIGURATION_SID | Identifier for a set of config properties for your video application - [find yours here](https://www.twilio.com/console/video/profiles). |
 
 ## Run the demo application
+
+This demo application runs two servers simulanteously. One is a server that serves
+the front-end assets of the application, the other is a server that exposes a backend
+endpoint that will be used for authentication. The front-end server contains a proxy
+to the backend server so that users can send a query from the frontend server
+to the backend server. You can read more about this type of development
+setup in [the official create-react-app documentation](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#node).
  
-Now that the application is configured, we need to install both our backend
-and frontend dependencies. We'll install the dependencies for our backend
-application.
+So we need to install both our backend and frontend dependencies.
+Let's install the dependencies for our backend first.
 
 ```
 npm install
@@ -62,7 +68,7 @@ cd ..
 npm start
 ```
 
-Then navigae to [http://localhost:3000/login](http://localhost:3000/login) in
+Then navigate to [http://localhost:3000/login](http://localhost:3000/login) in
 order to use the application.
 
 ### Changing the application port
