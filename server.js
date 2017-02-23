@@ -13,7 +13,6 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
