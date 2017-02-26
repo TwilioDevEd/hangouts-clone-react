@@ -84,10 +84,6 @@ Login.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
 export const mapDispatchToProps = (dispatch) => ({
   postSuccess: (token, id, username) => {
     dispatch(setUserToken(token));
@@ -96,4 +92,4 @@ export const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
